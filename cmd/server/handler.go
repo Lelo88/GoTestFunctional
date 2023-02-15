@@ -28,6 +28,16 @@ func (h *Handler) ConfigureShark() gin.HandlerFunc {
 	}
 
 	return func(context *gin.Context) {
+
+		var req request
+		var resp response
+		if err:= context.ShouldBindJSON(&req); err!= nil {
+			resp.Success = false
+			
+		}
+		position := [2]float64{req.XPosition, req.YPosition}
+		speed := req.Speed
+		shark:= h.shark.Configure([2]float64{}, speed)
 	}
 }
 
@@ -41,7 +51,9 @@ func (h *Handler) ConfigurePrey() gin.HandlerFunc {
 		Success bool `json:"success"`
 	}
 
+
 	return func(context *gin.Context) {
+		
 	}
 }
 
